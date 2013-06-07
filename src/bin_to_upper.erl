@@ -5,7 +5,10 @@
 		 comprehension2/1,
 
 		 conversion/1,
-		 conversion2/1
+		 conversion2/1,
+
+		 recursion/1,
+		 recursion2/1
 		]).
 
 char_to_upper(Ch) when Ch >= $a, Ch =< $z ->
@@ -62,3 +65,15 @@ conversion2(Bin) ->
 %% middle2_case(Bin) ->
 %% 	list_to_binary([ char_to_upper2(Ch) || <<Ch>> <= Bin ]).
 %% 	<< << (char_to_upper2(Ch)) >> || Ch <- binary_to_list(Bin) >>.
+
+recursion(Bin) ->
+	recursion(Bin, <<>>).
+recursion(<<X,Rest/binary>>, Acc) ->
+	recursion(Rest,<<Acc/binary,(char_to_upper(X))>>);
+recursion(<<>>, Acc) -> Acc.
+
+recursion2(Bin) ->
+	recursion2(Bin, <<>>).
+recursion2(<<X,Rest/binary>>, Acc) ->
+	recursion2(Rest,<<Acc/binary,(char_to_upper2(X))>>);
+recursion2(<<>>, Acc) -> Acc.
